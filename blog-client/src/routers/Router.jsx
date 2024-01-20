@@ -14,26 +14,26 @@ import Editpost from "../pages/Editpost";
 import Logout from "../pages/Logout";
 import Register from "../pages/Register";
 
-const router  = createBrowserRouter([
-    {
-       path: "/",
-       element: <Layout /> ,
-       errorElement: <Errorpage />,
-       children: [
-         {index: true, element: <Home />},
-         {path:"/posts/:id" , element: <Postdetails />},
-         {path: "/login" , element: <Login />},
-         {path: "/profile/:id" , element : <Userprofile />},
-         {path:"/register" , element: <Register/>},
-         {path: "/authors" , element: <Authors/>},
-         {path: "/create" , element: <Createpost/>},
-         {path: "/posts/categories/:category" , element: <Categorypost/>},
-         {path: "/posts/users/:id" , element: <Authorpost/>},
-         {path: "/my-posts/:id" , element: <Dashboard/>},
-         {path: "/posts/:id/edit" , element: <Editpost/>},
-         {path: "/logout" , element: <Logout/>}
-       ]
-    },
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    errorElement: <Errorpage />,
+    children: [
+      { index: true, element: <Home /> },
+      { path: "/posts/:id", element: <Postdetails /> },
+      { path: "/login", element: <Login /> },
+      { path: "/profile/:id", element: <Userprofile /> },
+      { path: "/register", element: <Register /> },
+      { path: "/authors", element: <Authors /> },
+      { path: "/create", element: <Createpost /> },
+      { path: "/posts/categories/:category", element: <Categorypost /> },
+      { path: "/posts/users/:id", element: <Authorpost /> },
+      { path: "/my-posts/:id", element: <Dashboard /> },
+      { path: "/posts/:id/edit", element: <Editpost /> },
+      { path: "/logout", element: <Logout /> },
+    ],
+  },
 ]);
 
-export  default router;
+export default router;
