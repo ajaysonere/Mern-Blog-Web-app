@@ -19,7 +19,7 @@ const DUMMY_POSTS = [
     id: "2",
     thumbnail: blog2,
     category: "science",
-    title: "This is the title of the second post on the blog",
+    title: "Welcome to india , The Land of Divercity",
     desc: "Richard McClintock, a Latin scholar from Hampden-Sydney College, is credited with discovering the source behind the ubiquitous filler text. In seeing a sample of lorem ipsum, his interest was piqued by consectetur—a genuine, albeit rare, Latin word. Consulting a Latin dictionary led McClintock to a passage from De Finibus Bonorum et Malorum (“On the Extremes of Good and Evil”), a first-century B.C. text from the Roman philosopher Cicero",
     authorID: 1,
   },
@@ -45,7 +45,7 @@ const Posts = () => {
   const [posts, setPosts] = useState(DUMMY_POSTS);
 
   return (
-    <div className="posts">
+    <section className="posts">
       <div className="container posts__container">
         {DUMMY_POSTS.map(
           ({ id, thumbnail, category, title, desc, authorID }) => (
@@ -61,7 +61,7 @@ const Posts = () => {
           )
         )}
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -15,7 +15,7 @@ body {
   --color-gray-700: #252542;
   --color-gray-900: #0c0c22;
 
-  --color-bg: hwb(240, 95%, 0%);
+  --color-bg: hwb(240 95% 0% / 0.89);
   --transition: all 0.5s ease;
 
   --container-width-lg: 84%;
@@ -159,7 +159,7 @@ nav {
   height: 5rem;
   display: grid;
   place-items: center;
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--color-bg);
   position: fixed;
   top: 0;
   left: 0;
@@ -237,7 +237,6 @@ footer {
     display: grid;
     grid-template-columns: repeat(3 , 1fr);
     gap: 4rem;
-    padding-top: 8rem;
 }
 
 .post {
@@ -285,4 +284,36 @@ footer {
      aspect-ratio: 1/1;
      border-radius: var(--radius-2);
      overflow: hidden;
+}
+
+/* POST Details */
+
+.post-details{
+    width: var(--form-width);
+    background: var(--color-white);
+    margin-inline: auto;
+    padding: 2rem 0;
+}
+
+.post-details__header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.post-details__buttons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.post-details__thumbnails{
+    margin: 1rem 0;
+    height: fit-content;
+    max-height: 30rem;
+    overflow: hidden;
+}
+
+.post-details p {
+    margin-bottom: 0.7rem;
 }
