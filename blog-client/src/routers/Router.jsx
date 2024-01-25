@@ -29,7 +29,7 @@ const router = createBrowserRouter([
       { path: "/create", element: <Createpost /> },
       { path: "/posts/categories/:category", element: <Categorypost /> },
       { path: "/posts/users/:id", element: <Authorpost /> },
-      { path: "/my-posts/:id", element: <Dashboard /> },
+      { path: "/myposts/:id", element: <Dashboard /> },
       { path: "/posts/:id/edit", element: <Editpost /> },
       { path: "/logout", element: <Logout /> },
     ],
