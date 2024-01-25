@@ -17,7 +17,7 @@ const Header = () => {
             <Link to="/create">Create Post</Link>
           </li>
           <li> 
-            <Link className="authors">Authors</Link>
+            <Link to="/authors" className="authors">Authors</Link>
           </li>
           <li>
             <Link className="/logout">Logout</Link>
