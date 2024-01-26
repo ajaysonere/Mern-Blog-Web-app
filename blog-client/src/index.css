@@ -503,12 +503,6 @@ input , select , textarea {
 
 
 
-
-
-
-
-
-
 /* ============== my posts ===================  */
 
 .dashboard__container {
@@ -544,6 +538,111 @@ input , select , textarea {
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+/* ============== Media Query (Small devices) ===================  */
+
+@media screen and (max-width: 800px) {
+
+    h1{
+       font-size: 1.5rem;
+    }
+    
+    h2{
+       font-size: 1.4rem;
+    }
+    
+    h3{
+       font-size: 1.2rem;
+    }
+    
+    .container {
+      width: var(--container-width-md);
+    }
+    
+    /* Navbar */
+    
+    .nav__container {
+       position: relative;
+    }
+    
+    .nav__menu {
+       position: absolute;
+       top: 5rem;
+       right: 0;
+       flex-direction: column;
+       gap: 0.5rem;
+    }
+    
+    .nav__menu li {
+       width: 100%;
+       box-shadow: -2rem 4rem 4rem rgba(0,0,0,0.07);
+    }
+    
+    .nav__menu li a{
+       display: block;
+       background: var(--color-white);
+       padding: 0.85rem 2.5rem;
+    }
+    
+    .nav__toggle-btn {
+       display: inline-block;
+       background: transparent;
+       font-size: 1.5rem;
+       cursor: pointer;
+    }
+    
+    .posts__container {
+       grid-template-columns: 1fr;
+       gap: 1rem;
+    }
+    
+    .footer__container {
+      flex-direction: column;
+      gap: 2rem;
+    }
+    
+    .post-details {
+       width: 95%;
+       background: transparent;
+       padding: 0;
+    }
+    
+    .register , 
+    .login ,
+    .create-post {
+      width: 100%;
+    }
+    
+    .form.profile__form {
+      margin-top: 2.5rem;
+      width: 100%;
+    }
+    
+    .authors__container {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+    }
+    
+    .dashboard__post {
+       flex-direction: column;
+    }
+    
+    .dashboard__post-info {
+      gap: 1.5rem;
+    }
+    .dashboard__post-thumbnail {
+       width: 5rem;
+    }
 }
 
 
