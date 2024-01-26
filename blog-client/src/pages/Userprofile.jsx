@@ -56,25 +56,25 @@ const Userprofile = () => {
               type="email"
               placeholder="Email"
               value={email}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
               placeholder="Current password"
               value={currentPassword}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setCurrentPassword(e.target.value)}
             />
             <input
               type="password"
               placeholder="New Password"
               value={newPassword}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setNewPassword(e.target.value)}
             />
             <input
               type="password"
               placeholder="Confirm Password"
               value={confirmPassword}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <button type="submit" className="btn primary">Update Details </button>
           </form>

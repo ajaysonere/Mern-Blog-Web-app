@@ -5,4 +5,4 @@ const Deletepost = () => {
   )
 }
 
-export default Deletepost
+export default Deletepost;
