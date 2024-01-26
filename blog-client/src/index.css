@@ -336,6 +336,7 @@ input , select , textarea {
     border: var(--raduis-1);
     resize: none;
     font-family: 'Poppins' , sans-serif;
+    background: var(--color-white);
 }
 
 .form__error-message {
@@ -374,6 +375,14 @@ input , select , textarea {
 .register small a ,
 .login small a{
    color: var(--color-primary);
+}
+
+.ql-editor {
+   overflow: scroll;
+   background-color: var(--color-white);
+   height: 10rem !important;
+   font-family: 'Poppins' , sans-serif;
+   font-size: 1rem;
 }
 
 
