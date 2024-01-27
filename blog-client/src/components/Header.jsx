@@ -8,13 +8,17 @@ const Header = () => {
   const [showNavbar , setShowNavbar] = useState(true);
   
   const handleNavbar = () => {
-      setShowNavbar(!showNavbar);
+      if(window.innerWidth < 800){
+         setShowNavbar(false);
+      }else{
+         setShowNavbar(true);
+      }
   }
   
   return (
     <nav>
       <div className="container nav__container">
-        <Link to="/" className="nav__logo" onClick={handleNavbar}>
+        <Link to="/" className="nav__logo" >
           <img src="/images/logo.png"></img>
         </Link>
         {showNavbar && (
