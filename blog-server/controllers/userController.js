@@ -45,7 +45,7 @@ export const registerUser = async(req , res , next) => {
       res.status(201).json(`New user ${newUser.email} registered`);
       
    } catch (error) {
-      return next( new HttpError(`Error while registering User` , 422));
+      return next( new HttpError(`Error while registering User` , 500));
    }
 }
 
@@ -81,7 +81,7 @@ export const loginUser = async(req , res , next) => {
        res.status(200).json(token);
        
     }catch(error){
-       return next(new HttpError(`Failed to Login`) , 422);
+       return next(new HttpError(`Failed to Login`) , 500);
     }
 };
 
@@ -90,8 +90,22 @@ export const loginUser = async(req , res , next) => {
 
 // Path = /api/users/:id
 
-export const getUser = (req , res) => {
-    res.send("Get user");
+export const getUser = async(req , res , next) => {
+   try {
+   
+     const {id} =  req.params;
+     
+     const user = await User.findById(id).select('-password');
+     
+     if(!user){
+        return next(new HttpError(`User not found` , 404));
+     }
+     
+     res.status(200).json({success: true , user: user });
+   
+   } catch (error) {
+     return next(new HttpError(`Failed to get user` , 500));
+   }
 }
 
 
@@ -101,7 +115,7 @@ export const getUser = (req , res) => {
 // Path = /api/users/change-avatar
 
 export const changeAvatar = (req , res) => {
-    res.send("Change Avatar");
+   
 }
 
 
@@ -121,8 +135,19 @@ export const editUser = (req , res) => {
 
 // Path = /api/users/authors
 
-export const getAuthors  = (req , res) => {
-    res.send("Get Authors");
+export const getAuthors  = async (req , res , next) => {
+   try {
+      const authors = await User.find({}).select("-password");
+      
+      if(!authors){
+         return next(new HttpError(`author not present` , 422));
+      }
+      
+      res.status(200).json(authors);
+      
+   } catch (error) {
+      return next(new HttpError(`Failed to get Authors` , 500))
+   }
 }
 
 
