@@ -10,6 +10,6 @@ userRouter.post("/login" , loginUser);
 userRouter.get("/authors" , getAuthors);
 userRouter.get("/:id" , getUser);
 userRouter.post("/change-avatar" , authMiddleware , changeAvatar);
-userRouter.post("/edit-user" , editUser);
+userRouter.patch("/edit-user" ,authMiddleware , editUser);
 
 export default userRouter;

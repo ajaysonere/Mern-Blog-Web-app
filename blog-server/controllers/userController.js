@@ -188,8 +188,53 @@ export const changeAvatar = async (req, res, next) => {
 
 // Path = /api/users/edit-user
 
-export const editUser = (req, res) => {
-  res.send("Edit user");
+export const editUser = async(req, res , next) => {
+    try {
+       const {name , email , currentPassword , newPassword , confirmPassword} = req.body;
+       
+       if(!name || !email || !currentPassword || !newPassword){
+          return next(new HttpError(`Fill in all fields`, 422));
+       }
+       
+       //get user from database
+       
+       const user = await User.findById(req.user.id);
+       
+       if(!user){
+          return next(new HttpError(`User not found ` , 404));
+       }
+       
+      const emailExist = User.findOne({email});
+      
+      if(emailExist && (emailExist._id && req.user.id)){
+         return next(new HttpError(`Email ready exist` , 422))
+      }
+      
+      // validate current password to db
+      
+      const validatePassword = await bcrypt.compare(currentPassword , user.password);
+      
+      if(!validatePassword){
+         return next(new HttpError(`Invalid Current Password`, 422));
+      }
+      
+      // compare password
+      
+      if(newPassword !== confirmPassword){
+          return next(new HttpError(`New password did not match` , 422));
+      }
+      
+      // hash new password
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(currentPassword , salt);
+      
+      const newInfo = await User.findByIdAndUpdate(req.user.id , {name, email, password: hashedPassword}, {new: true});
+      
+      res.status(200).json({success : true , data : newInfo});
+      
+    } catch (error) {
+      return next(new HttpError(error));
+    }
 };
 
 // ============== Get User/ Authours ===============
