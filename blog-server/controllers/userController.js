@@ -14,7 +14,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 // Path = /api/users/register
 
 export const registerUser = async (req, res, next) => {
+
   try {
+  
     const { name, email, password, confirmPassword } = req.body;
 
     if (!name || !email || !password || !confirmPassword) {
