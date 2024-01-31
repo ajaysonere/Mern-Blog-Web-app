@@ -14,11 +14,16 @@ import Editpost from "../pages/Editpost";
 import Logout from "../pages/Logout";
 import Register from "../pages/Register";
 import Deletepost from "../pages/Deletepost";
+import { UserProvider } from "../contexts/userContext";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: (
+      <UserProvider>
+        <Layout />
+      </UserProvider>
+    ),
     errorElement: <Errorpage />,
     children: [
       { index: true, element: <Home /> },
@@ -32,7 +37,7 @@ const router = createBrowserRouter([
       { path: "/posts/users/:id", element: <Authorpost /> },
       { path: "/myposts/:id", element: <Dashboard /> },
       { path: "/posts/:id/edit", element: <Editpost /> },
-      { path: "/posts/:id/delete", element: <Deletepost/> },
+      { path: "/posts/:id/delete", element: <Deletepost /> },
       { path: "/logout", element: <Logout /> },
     ],
   },

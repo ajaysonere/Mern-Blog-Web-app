@@ -1,12 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
-import { useState } from "react";
+import { useState , useContext} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { UserContext } from "../contexts/userContext";
 
 const Login = () => {
   const [error , setError] = useState("");
   const navigate = useNavigate();
-  
+  const {setCurrentUser} = useContext(UserContext);
   const [userData, setUserData] = useState({
     email: "",
     password: ""
@@ -29,7 +30,7 @@ const Login = () => {
        if(!user){
          setError("Could not login");
        }
-       
+       setCurrentUser(user);
        navigate("/");
        
      } catch (error) {
