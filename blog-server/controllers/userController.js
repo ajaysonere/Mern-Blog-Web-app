@@ -94,9 +94,9 @@ export const loginUser = async (req, res, next) => {
       { expiresIn: "5d" }
     );
 
-    res.status(200).json(token);
+    res.status(200).json({id :existingUser._id , name: existingUser.name , token});
   } catch (error) {
-    return next(new HttpError(`Failed to Login`), 500);
+    return next(new HttpError(error));
   }
 };
 

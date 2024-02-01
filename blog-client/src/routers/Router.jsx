@@ -11,10 +11,10 @@ import Createpost from "../pages/Createpost";
 import Categorypost from "../pages/Categorypost";
 import Dashboard from "../pages/Dashboard";
 import Editpost from "../pages/Editpost";
-import Logout from "../pages/Logout";
 import Register from "../pages/Register";
 import Deletepost from "../pages/Deletepost";
 import { UserProvider } from "../contexts/userContext";
+import Logout from "../pages/Logout";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +29,7 @@ const router = createBrowserRouter([
       { index: true, element: <Home /> },
       { path: "/posts/:id", element: <Postdetails /> },
       { path: "/login", element: <Login /> },
+      {path: "/logout" , element: <Logout/>},
       { path: "/profile/:id", element: <Userprofile /> },
       { path: "/register", element: <Register /> },
       { path: "/authors", element: <Authors /> },
@@ -38,7 +39,6 @@ const router = createBrowserRouter([
       { path: "/myposts/:id", element: <Dashboard /> },
       { path: "/posts/:id/edit", element: <Editpost /> },
       { path: "/posts/:id/delete", element: <Deletepost /> },
-      { path: "/logout", element: <Logout /> },
     ],
   },
 ]);
