@@ -7,7 +7,7 @@ import { UserContext } from '../contexts/userContext';
 
 const Header = () => {
   
-  const [showNavbar , setShowNavbar] = useState(true);
+  const [showNavbar , setShowNavbar] = useState(false);
   const {currentUser} = useContext(UserContext);
   
   const handleNavbar = () => {
