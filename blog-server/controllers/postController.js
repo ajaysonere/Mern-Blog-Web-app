@@ -70,12 +70,15 @@ export const createPost = async(req , res , next) => {
 export const getPost = async(req , res , next) => {
     try {
         const postId = req.params.id;
+        
+        console.log(postId);
+        
         const post  = await Post.findById(postId);
         
         if(!post){
            return next(new HttpError(`post not found` , 404));
         }
-        res.status(200).json({success: true , data: post});
+        res.status(200).json(post);
     } catch (error) {
         return next(new HttpError(`Failed to get post` , 500))
     }
@@ -92,7 +95,7 @@ export const getAllPost = async(req , res , next) => {
            return next(new HttpError('No posts found'),422);
         }
         
-        res.status(200).json({success: true,data:allPost});
+        res.status(200).json(allPost);
     } catch (error) {
         return next(new HttpError(`Failed to get all posts` , 500));
     }
@@ -120,7 +123,7 @@ export const getUsersPosts = async(req , res , next) => {
     try {
         const {id} = req.params;
         const posts = await Post.find({creator:id}).sort({createdAt: -1});
-        res.status(200).json({success: true , data : posts});
+        res.status(200).json(posts);
     } catch (error) {
         return next(new HttpError('failed to get user posts' , 500));
     }

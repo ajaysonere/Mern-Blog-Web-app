@@ -7,18 +7,24 @@ const PostItems = ({
   title,
   category,
   desc,
-  authorID,
+  creator,
   thumbnail,
+  createdAt
 }) => {
 
   const shortDescription = desc.length > 145 ? desc.substr(0,145) + "..." : desc; 
   const shortTitle =
     title.length > 30 ? title.substr(0, 30) + "..." : title; 
+    
+    const url = `${
+      import.meta.env.VITE_REACT_APP_ASSETS_URL
+    }/uploads/${thumbnail}`;
+    
 
   return (
       <article className="post">
         <div className="post__thumbnail">
-           <img src={thumbnail} alt="image"></img>
+           <img src={url} alt="image"></img>
         </div>
         <div className="post__content">
            <Link to= {`/posts/${postID}`} >
@@ -26,7 +32,7 @@ const PostItems = ({
            </Link>
            <p>{shortDescription}</p>
            <div className="post__footer">
-              <Postauthors />
+              <Postauthors creator={creator} createdAt = {createdAt} />
               <Link to={`/posts/categories/${category}`} className="btn category">{category}</Link>
            </div>
         </div>

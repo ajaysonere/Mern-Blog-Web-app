@@ -114,7 +114,7 @@ export const getUser = async (req, res, next) => {
       return next(new HttpError(`User not found`, 404));
     }
 
-    res.status(200).json({ success: true, data: user });
+    res.status(200).json(user);
   } catch (error) {
     return next(new HttpError(`Failed to get user`, 500));
   }
