@@ -107,7 +107,7 @@ export const getCategoryPosts = async(req , res , next) => {
     try {
         const {category} = req.params;
         const postsByCategories = await Post.find({category}).sort({createdAt: -1});
-        res.status(200).json({success: true , data : postsByCategories});
+        res.status(200).json(postsByCategories);
     } catch (error) {
         return next(new HttpError(`Falied to get posts by category` , 422));
     }
@@ -205,7 +205,7 @@ export const editPost = async(req , res , next) => {
            return next(new HttpError(`Cloud not update the post`, 422));
          }
 
-         res.status(200).json({ success: true, data: updatedPost });
+         res.status(200).json(updatedPost);
         
     } catch (error) {
         return next(new HttpError(error));

@@ -11,13 +11,13 @@ const Footer = () => {
           <Link to="/posts/categories/business">Business</Link>
         </li>
         <li>
-          <Link to="/posts/categories/education">Education</Link>
+          <Link to="/posts/categories/Education">Education</Link>
         </li>
         <li>
           <Link to="/posts/categories/entertainment">Entertainment</Link>
         </li>{" "}
         <li>
-          <Link to="/posts/categories/art">Art</Link>
+          <Link to="/posts/categories/Art">Art</Link>
         </li>{" "}
         <li>
           <Link to="/posts/categories/invesment">Invesment</Link>
