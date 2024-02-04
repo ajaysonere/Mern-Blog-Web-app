@@ -71,8 +71,6 @@ export const getPost = async(req , res , next) => {
     try {
         const postId = req.params.id;
         
-        console.log(postId);
-        
         const post  = await Post.findById(postId);
         
         if(!post){

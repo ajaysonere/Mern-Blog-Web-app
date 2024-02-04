@@ -528,14 +528,19 @@ textarea {
 /* Loader */
 
 .loader {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-inline: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  place-items: center;
+  background: var(--color-bg);
 }
 
 .loader__image {
-  background-size: cover;
+  width: 5rem;
+  aspect-ratio: 1/1;
   mix-blend-mode: multiply;
 }
 

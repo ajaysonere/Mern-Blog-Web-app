@@ -1,7 +1,8 @@
+import { Link } from "react-router-dom";
 
 const Deletepost = () => {
   return (
-    <div>Deletepost</div>
+    <Link className="btn sm danger">Delete</Link>
   )
 }
 

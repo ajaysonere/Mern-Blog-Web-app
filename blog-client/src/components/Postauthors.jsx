@@ -33,7 +33,7 @@ const Postauthors = ({ creator, createdAt }) => {
 
   return (
     <div>
-      <Link to={`/posts/users/sdsd`} className="post__author">
+      <Link to={`/posts/users/${author?._id}`} className="post__author">
         <div className="post__author-avatar">
           <img
             src={`${import.meta.env.VITE_REACT_APP_ASSETS_URL}/uploads/${
