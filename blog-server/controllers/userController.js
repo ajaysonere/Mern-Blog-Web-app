@@ -251,7 +251,7 @@ export const getAuthors = async (req, res, next) => {
       return next(new HttpError(`author not present`, 422));
     }
 
-    res.status(200).json({ success: true, data: authors });
+    res.status(200).json(authors);
   } catch (error) {
     return next(new HttpError(`Failed to get Authors`, 500));
   }
