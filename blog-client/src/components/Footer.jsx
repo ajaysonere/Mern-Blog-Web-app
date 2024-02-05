@@ -5,28 +5,28 @@ const Footer = () => {
     <footer>
       <ul className="footer__container">
         <li>
-          <Link to="/posts/categories/agriculture">Agriculture</Link>
+          <Link to="/posts/categories/Agriculture">Agriculture</Link>
         </li>
         <li>
-          <Link to="/posts/categories/business">Business</Link>
+          <Link to="/posts/categories/Business">Business</Link>
         </li>
         <li>
           <Link to="/posts/categories/Education">Education</Link>
         </li>
         <li>
-          <Link to="/posts/categories/entertainment">Entertainment</Link>
+          <Link to="/posts/categories/Entertainment">Entertainment</Link>
         </li>{" "}
         <li>
           <Link to="/posts/categories/Art">Art</Link>
         </li>{" "}
         <li>
-          <Link to="/posts/categories/invesment">Invesment</Link>
+          <Link to="/posts/categories/Invesment">Invesment</Link>
         </li>
         <li>
-          <Link to="/posts/categories/wheather">Weather</Link>
+          <Link to="/posts/categories/Wheather">Weather</Link>
         </li>
         <li>
-          <Link to="/posts/categories/uncategorized">Uncategorized</Link>
+          <Link to="/posts/categories/Uncategorized">Uncategorized</Link>
         </li>
       </ul>
       <div className="footer__copyright">

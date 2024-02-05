@@ -3,12 +3,14 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { UserContext } from "../contexts/userContext";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Createpost = () => {
   const [title, setTitle] = useState("");
-  const [thumbnail, setThumbnail] = useState("");
+  const [thumbnail, setThumbnail] = useState(null); // Initialize with null
   const [category, setCategory] = useState("Uncategorized");
-  const [desc, setDesc] = useState("");
+  const [description, setDescription] = useState("");
+  const [error, setError] = useState("");
   const navigate = useNavigate();
 
   const { currentUser } = useContext(UserContext);
@@ -60,12 +62,38 @@ const Createpost = () => {
     "Weather",
   ];
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const postData = new FormData();
+    postData.append("title", title);
+    postData.append("category", category);
+    postData.append("description", description);
+    postData.append("thumbnail", thumbnail);
+
+    console.log(postData);
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_REACT_APP_BASE_URL}/posts`,
+        postData,
+        { withCredentials: true, headers: { Authorization: `Bearer ${token}` } }
+      );
+
+      if (response.status === 201) {
+        return navigate("/");
+      }
+    } catch (error) {
+      setError(error.response.data.message);
+    }
+  };
+
   return (
     <section className="create-post">
       <div className="container createpost__container">
         <h2>Create Post </h2>
-        <p className="form__error-message">This is an Error Message </p>
-        <form className="form create-post__form">
+        {error && <p className="form__error-message">{error}</p>}
+        <form className="form create-post__form" onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Title"
@@ -78,21 +106,20 @@ const Createpost = () => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            {POST_CATEGORIES.map((cat) => {
-              return <option key={cat}>{cat}</option>;
-            })}
+            {POST_CATEGORIES.map((cat) => (
+              <option key={cat}>{cat}</option>
+            ))}
           </select>
           <ReactQuill
             modules={modules}
             formats={formats}
-            value={desc}
-            onChange={(e) => setDesc(e.target.value)}
+            value={description}
+            onChange={setDescription}
           />
-
           <input
             type="file"
-            onChange={(e) => setThumbnail(e.target.value[0])}
-            accept="png , jpg ,jpeg"
+            onChange={(e) => setThumbnail(e.target.files[0])}
+            accept="png,jpeg,jpg"
           />
           <button type="submit" className="btn primary">
             Create
