@@ -10,6 +10,8 @@ const Header = () => {
   const [showNavbar , setShowNavbar] = useState(true);
   const {currentUser} = useContext(UserContext);
   
+  const id = currentUser?.id;
+  
   const handleNavbar = () => {
       setShowNavbar(!showNavbar);
   }
@@ -24,7 +26,7 @@ const Header = () => {
         {currentUser?.id && showNavbar && (
           <ul className="nav__menu">
             <li>
-              <Link to="/profile/asdfsd">{currentUser.name}</Link>
+              <Link to={`/profile/${id}`}>{currentUser.name}</Link>
             </li>
             <li>
               <Link to="/create">Create Post</Link>

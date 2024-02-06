@@ -135,7 +135,6 @@ export const changeAvatar = async (req, res, next) => {
     // find user from database
 
     const user = await User.findById(req.user.id);
-
     // delete the file if already present
     if (user.avatar) {
       fs.unlink(path.join(__dirname, "..", "uploads", user.avatar), (err) => {
@@ -178,7 +177,7 @@ export const changeAvatar = async (req, res, next) => {
          return next(new HttpError(err));
       }
       
-      res.status(200).json({success : true , data : updateAvatar});
+      res.status(200).json(updateAvatar);
   })
     
   } catch (error) {

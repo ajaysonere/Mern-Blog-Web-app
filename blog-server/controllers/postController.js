@@ -229,25 +229,31 @@ export const deletePost = async(req , res , next) => {
         
         // delete the thumbnail
         
-        if(req.user.id !== post.creator){
-           return next(new HttpError("You don't have access to delete this post", 422));
+        if(req.user.id == post.creator){
+        
+            fs.unlink(
+              path.join(__dirname, "..", "uploads", fileName),
+              async (err) => {
+                if (err) {
+                  return next(new HttpError(err));
+                } else {
+                  await Post.findByIdAndDelete(postId);
+                  // decrease the count
+                  const currentUser = await User.findById(req.user.id);
+
+                  const countPost = currentUser?.posts - 1;
+
+                  await User.findByIdAndUpdate(req.user.id, {
+                    posts: countPost,
+                  });
+                }
+              }
+            );
+        }else{
+           return next(
+             new HttpError("You don't have access to delete this post", 422)
+           );
         }
-        
-        
-        fs.unlink(path.join(__dirname , ".." , "uploads" , fileName) ,async (err) => {
-            if(err){
-               return next(new HttpError(err));
-            }else {
-                await Post.findByIdAndDelete(postId);
-                // decrease the count 
-                const currentUser = await User.findById(req.user.id);
-                
-                const countPost = currentUser?.posts -1;
-                
-                await User.findByIdAndUpdate(req.user.id , {posts: countPost});
-            }
-        })
-        
         res.status(200).json({success : true});
         
     } catch (error) {
