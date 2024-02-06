@@ -1,9 +1,10 @@
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 import { FaEdit } from "react-icons/fa";
 import { FaCheck } from "react-icons/fa";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { UserContext } from "../contexts/userContext";
 import axios from "axios";
+import Loader from '../components/Loader';
 
 const Userprofile = () => {
   const [avatar, setAvatar] = useState("");
@@ -13,11 +14,15 @@ const Userprofile = () => {
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isAvatarTouched, setIsAvatarTouched] = useState(false);
+  const [error , setError] = useState("");
+  const [loading , setLoading] = useState(false);
 
   const { currentUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   const id = currentUser?.id;
   const token = currentUser?.token;
+  
 
   const changeAvatarHandler = async () => {
     setIsAvatarTouched(false);
@@ -36,9 +41,54 @@ const Userprofile = () => {
       console.log(error);
     }
   };
+  
+  useEffect(() => {
+      const getData = async() => {
+          setLoading(true);
+          try {
+              const response = await axios.get(
+                `${import.meta.env.VITE_REACT_APP_BASE_URL}/users/${id}`
+              );
 
-  console.log(`${import.meta.env.VITE_REACT_APP_ASSETS_URL}/uploads/${avatar}`);
-  // console.log(avatar);
+              const data = await response?.data;
+              setName(data.name);
+              setEmail(data.email);
+              setAvatar(data.avatar);
+          } catch (error) {
+            setError(error.response.data.message);
+          }
+          setLoading(false);
+      }
+      getData();
+  }, [])
+  
+  
+  const handleUpdateDetails = async(e) => {
+     e.preventDefault();
+     try {
+          const userData = new FormData();
+          userData.set("name" , name);
+          userData.set("email", email);
+          userData.set("currentPassword" , currentPassword),
+          userData.set("newPassword" , newPassword);
+          userData.set("confirmPassword" , confirmPassword);
+          
+          const response = await axios.patch(`${import.meta.env.VITE_REACT_APP_BASE_URL}/users/edit-user` , userData , {withCredentials: true , headers: {Authorization: `Bearer ${token}`}});
+          
+          if(response.status == 200){
+             navigate("/logout");
+          }
+          
+     } catch (error) {
+        setError(error.response.data.message);
+     }
+  }
+  
+  
+  
+  if(loading){
+    return <Loader />
+  }
 
   return (
     <section className="profile">
@@ -79,8 +129,8 @@ const Userprofile = () => {
 
           {/* form for update the profile data */}
 
-          <form className="form profile__form">
-            <p className="form__error-message">This is an Error Message</p>
+          <form className="form profile__form" onSubmit={handleUpdateDetails}>
+            {error && <p className="form__error-message">{error}</p>}
             <input
               type="text"
               placeholder="Full Name"

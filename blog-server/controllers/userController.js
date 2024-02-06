@@ -207,7 +207,7 @@ export const editUser = async(req, res , next) => {
        
       const emailExist = User.findOne({email});
       
-      if(emailExist && (emailExist._id && req.user.id)){
+      if(emailExist && (emailExist._id != req.user.id)){
          return next(new HttpError(`Email ready exist` , 422))
       }
       
@@ -227,7 +227,7 @@ export const editUser = async(req, res , next) => {
       
       // hash new password
       const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(currentPassword , salt);
+      const hashedPassword = await bcrypt.hash(newPassword , salt);
       
       const newInfo = await User.findByIdAndUpdate(req.user.id , {name, email, password: hashedPassword}, {new: true});
       
