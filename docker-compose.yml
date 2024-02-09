@@ -1,0 +1,45 @@
+version: "3"
+services:
+  client:
+     container_name: blog-client
+     restart: always
+     build: ./blog-client
+     ports:
+       - '5173:5173'
+     depends_on:
+       - backend
+     networks:
+       - mern-network
+     volumes:
+       - ./blog-client:/usr/src/app
+    
+  backend:
+     container_name: blog-server
+     restart: always
+     build: ./blog-server
+     ports:
+       - '5000:5000'
+     depends_on:
+       - mongoDB
+     networks:
+       - mern-network
+     volumes:
+       - ./blog-server:/usr/src/app
+     
+  mongoDB:
+    container_name: blog-mongoDB
+    image: mongo
+    ports:
+      - '27017:27017'
+    networks:
+      - mern-network
+    volumes:
+      - mongodb_data:/data/db
+
+volumes:
+  mongodb_data:
+    driver: local
+      
+networks:
+  mern-network:
+     driver: bridge
